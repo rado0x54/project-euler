@@ -1,6 +1,5 @@
- #!/usr/bin/env python3
+#!/usr/bin/env python3
 """Project Euler - Library for solving PE Problems"""
-
 
 # Fibonacci
 def fibonacci(number):
@@ -8,7 +7,35 @@ def fibonacci(number):
     if number < 2:
         return 1
     else:
-        return fibonacci(number-1) + fibonacci(number-2)
+        return fibonacci(number - 1) + fibonacci(number - 2)
+
+# Sum of Devisors
+
+
+def sum_of_devisors(number):
+    """Returns the sum of devisiors for the input number"""
+    n = number
+    devlist = [1]
+    i = 2
+
+    while i * i <= n:
+        j = 1  # accumulated devisors
+        applist = []
+        while n % i == 0:
+            n = n / i
+            j *= i
+            for x in devlist:
+                applist.append(x * j)
+
+        devlist.extend(applist)
+        i += 1
+
+        # Append Factor n if n > i
+    if n >= i:
+        devlist.extend([int(x * n) for x in devlist])
+        # print(input,devlist)
+    return sum(devlist) - number  # don't count input itself
+
 
 def raw_primes_sieve(limit):
     """Returns a list of generated primes"""
@@ -80,7 +107,7 @@ class FastPrimeChecker(object):
             return False
 
         if prime >= self.get_limit():
-            #print("Increasing size to",2*prime)
+            print("Increasing size of FastPrimeChecker", 2*prime)
             self.sieve = raw_primes_sieve(2 * prime)
 
         return self.sieve[prime]
