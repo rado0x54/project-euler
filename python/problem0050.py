@@ -7,7 +7,7 @@ import pelib
 def problem50(limit):
     """Problem 50 - Prime permutations"""
 
-    fpc = pelib.FastPrimeChecker(limit + 1)
+    fpc = pelib.FastPrimeChecker()
 
     # Lazy
     tsum = 0

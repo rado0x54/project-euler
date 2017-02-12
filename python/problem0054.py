@@ -72,6 +72,7 @@ def build_rank(cards):
 
 
 def determine_winner(p1_cards, p2_cards):
+    """Evaluate P1 and P2 cards and determine if winner or draw"""
     # -1 p1 wins
     # +1 p2 wins
     p1_rank, p1_prio_list = build_rank(p1_cards)

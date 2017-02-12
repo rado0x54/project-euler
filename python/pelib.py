@@ -1,6 +1,14 @@
 #!/usr/bin/env python3
 """Project Euler - Library for solving PE Problems"""
 
+from bisect import bisect_left
+import math
+
+# Palindrome
+def is_palindrome(word):
+    """Returns True if word holds palindrome property"""
+    return word == word[::-1]
+
 # Fibonacci
 def fibonacci(number):
     """Calculates the Fibonacci number"""
@@ -10,8 +18,6 @@ def fibonacci(number):
         return fibonacci(number - 1) + fibonacci(number - 2)
 
 # Sum of Devisors
-
-
 def sum_of_devisors(number):
     """Returns the sum of devisiors for the input number"""
     n = number
@@ -35,21 +41,6 @@ def sum_of_devisors(number):
         devlist.extend([int(x * n) for x in devlist])
         # print(input,devlist)
     return sum(devlist) - number  # don't count input itself
-
-
-def raw_primes_sieve(limit):
-    """Returns a list of generated primes"""
-    prime_list = []
-    if limit == int(limit) and limit > 1:
-        prime_list = [True] * limit
-        prime_list[0] = prime_list[1] = False
-
-        for (i, isprime) in enumerate(prime_list):
-            if isprime:
-                for pos in range(i * i, limit, i):
-                    prime_list[pos] = False
-
-    return prime_list
 
 
 def primes_sieve(limit):
@@ -91,26 +82,40 @@ def is_prime(number):
 
 
 class FastPrimeChecker(object):
-    "Fast Prime Checker. Set's up enumerated sieve at creation."
+    "Fast Prime Checker"
 
     def __init__(self, limit=None):
         if limit is None:
-            limit = 1000  # DEFAULT
+            limit = 1000000000  # DEFAULT
 
-        self.sieve = raw_primes_sieve(limit)
+        self.__rebuild_sieve(limit)
 
-    def get_limit(self):
-        return len(self.sieve)
+    def __rebuild_sieve(self, limit):
+        self.__limit = limit
+        self.__sqrt_limit = math.ceil(math.sqrt(limit))
+        self.__sieve = list(primes_sieve(self.__sqrt_limit))
 
-    def is_prime(self, prime):
-        if prime != int(prime) or prime < 2:
-            return False
+    def get_setup_limit(self):
+        return self.__limit
 
-        if prime >= self.get_limit():
-            print("Increasing size of FastPrimeChecker", 2*prime)
-            self.sieve = raw_primes_sieve(2 * prime)
+    def get_actual_limit(self):
+        return math.pow(self.__sqrt_limit, 2)
 
-        return self.sieve[prime]
+    def is_prime(self, n):
+        # if prime is already in the list, just pick it
+        if n < self.__sqrt_limit:
+            i = bisect_left(self.__sieve, n)
+            return i != len(self.__sieve) and self.__sieve[i] == n
+        # Divide by each known prime
+        limit = int(n ** .5)
+        for p in self.__sieve:
+            if p > limit: return True
+            if n % p == 0: return False
+        # fall back on trial division if n > 1 billion
+
+        print("Warning! {} Testing number {} > current sieve size! Doubling size to 2x{}".format(self.__class__.__name__, n, self.__limit))
+        self.__rebuild_sieve(2 * self.__limit)
+        return self.is_prime(n)
 
 
 # Mit choose efficient
@@ -119,8 +124,8 @@ def choose(n, k):
     A fast way to calculate binomial coefficients by Andrew Dalke (contrib).
     """
     if 0 <= k <= n:
-        ntok = 1
-        ktok = 1
+        ntok=1
+        ktok=1
         for t in range(1, min(k, n - k) + 1):
             ntok *= n
             ktok *= t

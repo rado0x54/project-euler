@@ -14,6 +14,18 @@ class TestPELibrary(unittest.TestCase):
         self.assertEqual(pelib.fibonacci(3), 3)
         self.assertEqual(pelib.fibonacci(5), 8)
 
+    def test_palindrome(self):
+        self.assertTrue(pelib.is_palindrome(''))
+        self.assertTrue(pelib.is_palindrome('a'))
+        self.assertTrue(pelib.is_palindrome('aa'))
+        self.assertTrue(pelib.is_palindrome('a1a'))
+        self.assertFalse(pelib.is_palindrome('ab'))
+
+    def test_FPC_SQRT(self):
+        fpc = pelib.FastPrimeCheckerSqrt(1000000000)
+        self.assertTrue(fpc.is_prime(31627))
+        self.assertFalse(fpc.is_prime(31623))
+
 
 if __name__ == '__main__':
     unittest.main()

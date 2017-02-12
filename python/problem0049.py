@@ -10,7 +10,7 @@ def problem49(nr_of_digits, dist):
     """Problem 49 - Prime permutations"""
     limit = 10 ** nr_of_digits
 
-    fpc = pelib.FastPrimeChecker(limit)
+    fpc = pelib.FastPrimeChecker()
 
     # Lazy
     result = 0
