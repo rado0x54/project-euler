@@ -1,5 +1,8 @@
 language: python
 python: 3.6
+install:
+    - pip install -r python/requirements.txt
+
 script:
     - python/pelibtest.py
     - python/peproblemtest.py
