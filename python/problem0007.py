@@ -1,22 +1,27 @@
 #!/usr/bin/env python3
 """Project Euler - Problem 1 Module"""
 
+from sympy import sieve
+
 def problem7(nr_of_prime):
     """Problem 7 - 10001st prime"""
-    primelist = []
 
-    i = 2
-    while len(primelist) < nr_of_prime:
-        prime = True
-        for x in primelist:
-            if i % x == 0:
-                prime = False
-                break
-        if prime:
-            primelist.append(i)
-        i = i+1
+    # old code :)
+    # primelist = []
 
-    return primelist[-1]
+    # i = 2
+    # while len(primelist) < nr_of_prime:
+    #     prime = True
+    #     for x in primelist:
+    #         if i % x == 0:
+    #             prime = False
+    #             break
+    #     if prime:
+    #         primelist.append(i)
+    #     i = i+1
+
+    sieve.extend_to_no(nr_of_prime)
+    return sieve._list[nr_of_prime-1]
 
 
 def run():
