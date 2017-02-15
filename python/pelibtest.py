@@ -21,8 +21,8 @@ class TestPELibrary(unittest.TestCase):
         self.assertTrue(pelib.is_palindrome('a1a'))
         self.assertFalse(pelib.is_palindrome('ab'))
 
-    def test_FPC_SQRT(self):
-        fpc = pelib.FastPrimeCheckerSqrt(1000000000)
+    def test_FPC(self):
+        fpc = pelib.FastPrimeChecker(1000000000)
         self.assertTrue(fpc.is_prime(31627))
         self.assertFalse(fpc.is_prime(31623))
 
