@@ -2,10 +2,9 @@
 """Project Euler - Problem 64 Module"""
 
 import math
-from fractions import Fraction
-
 
 def square_root_contined_fraction(n):
+    """Generator for getting the a_n of the root fractions"""
     # int(!), current_nominator = sqrt(n) - current_subtraction
     current_subtraction = 0
     current_denominator = 1  # int(!), initial case sq_n / 1
@@ -41,6 +40,7 @@ def square_root_contined_fraction(n):
 
 
 def square_root_contined_fraction_period_len(n):
+    """Returns period length of the root fractions of n"""
     return len(list(square_root_contined_fraction(n)))-1
 
 def problem64(limit):
