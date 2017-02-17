@@ -4,6 +4,10 @@
 from bisect import bisect_left
 import math
 
+# Sum of Digits
+def sum_of_digits(number):
+    return sum(int(x) for x in str(number))
+
 # Palindrome
 def is_palindrome(word):
     """Returns True if word holds palindrome property"""
