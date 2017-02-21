@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Project Euler - Problem 72 Module"""
+"""Project Euler - Problem 73 Module"""
 
 from fractions import Fraction
 from problem0071 import closest_neighbor_fraction
@@ -24,7 +24,7 @@ def problem73(limit_d, lower_limit, upper_limit):
 
         for i in range(right_lower, left_upper+1):
             # Only add Fractions that have not been added before
-            if Fraction(i,d).denominator == d: # This is clearly not efficient :)
+            if Fraction(i, d).denominator == d: # This is clearly not efficient :)
                 result += 1
     return result
 
