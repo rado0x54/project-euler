@@ -17,7 +17,7 @@ def find_prime_concatenates(current_primes, targetsize, sumlimit, solutions):
     #     current_primes, targetsize, sumlimit, solutions))
     if len(current_primes) == targetsize:
         solutions.append(current_primes)
-        print("Found Solution: {}".format(current_primes))
+        #print("Found Solution: {}".format(current_primes))
         return True
     else:
         # 2 can never concat new prime
