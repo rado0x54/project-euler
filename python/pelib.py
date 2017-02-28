@@ -21,6 +21,17 @@ def fibonacci(number):
     else:
         return fibonacci(number - 1) + fibonacci(number - 2)
 
+def fibonacci_generator():
+    a_1 = 0
+    a_2 = 1
+
+    while True:
+        yield a_2
+        a_2_next = a_2 + a_1
+        a_1 = a_2
+        a_2 = a_2_next
+
+
 # Sum of Devisors
 def sum_of_devisors(number):
     """Returns the sum of devisiors for the input number"""
