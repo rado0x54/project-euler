@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 """Project Euler - Problem 75 Module"""
 
-from pelib import fibonacci_generator
-from collections import deque
-
 from math import gcd
 from itertools import count
 
